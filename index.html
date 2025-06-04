@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <title>Movie Watchlist</title>
+  </head>
+  <body>
+    <header>
+      <h1>Find your film</h1>
+      <nav>
+        <a href="#">My Watchlist</a>
+      </nav>
+    </header>
+    <main>
+      <section class="search-field">
+        <form>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search for a movie"
+          />
+          <button type="submit">Search</button>
+        </form>
+      </section>
+      <section class="search-results">
+        <div class="movie">
+          <div class="movie-img">
+            <img src="images/test-img.png" alt="" />
+          </div>
+          <div class="movie-details">
+            <div class="movie-details-subsection">
+              <div class="movie-title-details">
+                <h2>Title</h2>
+                <p class="star">star</p>
+                <p class="movie-raiting">8.1</p>
+              </div>
+              <ul>
+                <li>116minh</li>
+                <li>Drama</li>
+                <li><button>ADD</button>Watchlist</li>
+              </ul>
+              <p>movie description</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

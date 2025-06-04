@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+img {
+  width: 50px;
+}
+
+.movie {
+  display: flex;
+  gap: 10px;
+}
+
+.movie-title-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
