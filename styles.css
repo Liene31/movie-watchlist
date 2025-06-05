@@ -160,6 +160,16 @@ li {
   line-height: 1.5;
 }
 
+/* Class removed after pressing Search Btn */
+
+.start-exploring-bg {
+  background-image: url(images/background.png);
+  background-repeat: no-repeat;
+  background-size: auto 40%;
+  background-position: center;
+  height: 75vh;
+}
+
 @media (max-width: 600px) {
   .inner-header {
     flex-direction: column;

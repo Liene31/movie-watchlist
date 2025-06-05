@@ -7,6 +7,7 @@ let movieDataArray = [];
 document.getElementById("search-btn").addEventListener("click", function (e) {
   e.preventDefault();
   const searchValue = searchInputEl.value;
+  document.getElementById("main").classList.remove("start-exploring-bg");
 
   // Search for the movies with given title
   fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`)
