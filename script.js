@@ -1,34 +1,32 @@
 const apiKey = "bf055b9";
 const searchInputEl = document.getElementById("search-input");
-let searchValue = "";
-const searchBtn = document.getElementById("search-btn");
 const searchResultsEl = document.getElementById("search-results");
-let movieTitle;
+let = movieIdArray = [];
+let = movieDataArray = [];
 
-searchBtn.addEventListener("click", async (e) => {
+document.getElementById("search-btn").addEventListener("click", function (e) {
   e.preventDefault();
+  const searchValue = searchInputEl.value;
 
-  const movieData = await Promise.all(
-    movieTitle.map((title) =>
-      fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${title}`).then(
-        (res) => res.json()
-      )
-    )
-  );
-  searchValue = searchInputEl.value;
-  console.log(searchValue);
-  renderHtml(movieData);
-});
+  fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`)
+    .then((res) => res.json())
+    .then((data) => {
+      movieIdArray = data.Search.map((movie) => movie.imdbID);
 
-fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=blade-runner`)
-  .then((res) => res.json())
-  .then((data) => {
-    movieTitle = data.Search.map((movie) => {
-      return movie.Title;
+      // Use Promise.all to wait for all fetches
+      return Promise.all(
+        movieIdArray.map((id) =>
+          fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`).then(
+            (res) => res.json()
+          )
+        )
+      );
+    })
+    .then((data) => {
+      movieDataArray = data;
+      renderHtml(movieDataArray);
     });
-
-    return movieTitle;
-  });
+});
 
 function renderHtml(movies) {
   console.log(movies);
@@ -60,3 +58,6 @@ function renderHtml(movies) {
 
   searchResultsEl.innerHTML = moviesHtml;
 }
+
+// 1. Returns currently only first page
+// 2. Maybe should put type movie or add later filters for years/type etc.
