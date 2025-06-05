@@ -42,7 +42,7 @@ function renderHtml() {
           <div class="movie-details-subsection">
             <div class="movie-title-details">
               <h2>${movie.Title}</h2>
-              <p class="star">star</p>
+              <p class="star"><i class="fa-solid fa-star"></i></p>
               <p class="movie-raiting">${movie.imdbRating}</p>
             </div>
             <ul>
@@ -50,7 +50,7 @@ function renderHtml() {
               <li>${movie.Genre}</li>
               <li><button>ADD</button>Watchlist</li>
             </ul>
-            <p>${movie.Plot}</p>
+            <p class="movie-description">${movie.Plot}</p>
           </div>
         </div>
       </div>
