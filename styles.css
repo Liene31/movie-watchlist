@@ -123,3 +123,10 @@ img {
   align-items: center;
   gap: 0.65em;
 }
+
+@media (max-width: 600px) {
+  .inner-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
