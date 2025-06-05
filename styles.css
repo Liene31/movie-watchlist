@@ -165,7 +165,7 @@ li {
 .start-exploring-bg {
   background-image: url(images/background.png);
   background-repeat: no-repeat;
-  background-size: auto 40%;
+  background-size: auto 20%;
   background-position: center;
   height: 75vh;
 }
