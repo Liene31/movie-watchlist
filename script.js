@@ -1,19 +1,21 @@
 const apiKey = "bf055b9";
 const searchInputEl = document.getElementById("search-input");
 const searchResultsEl = document.getElementById("search-results");
-let = movieIdArray = [];
-let = movieDataArray = [];
+let movieIdArray = [];
+let movieDataArray = [];
 
 document.getElementById("search-btn").addEventListener("click", function (e) {
   e.preventDefault();
   const searchValue = searchInputEl.value;
 
+  // Search for the movies with given title
   fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`)
     .then((res) => res.json())
     .then((data) => {
       movieIdArray = data.Search.map((movie) => movie.imdbID);
 
-      // Use Promise.all to wait for all fetches
+      // Promise.all to wait for all fetches
+      // Returns details on individual movie by ID
       return Promise.all(
         movieIdArray.map((id) =>
           fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`).then(
@@ -24,14 +26,13 @@ document.getElementById("search-btn").addEventListener("click", function (e) {
     })
     .then((data) => {
       movieDataArray = data;
-      renderHtml(movieDataArray);
+      renderHtml();
     });
 });
 
-function renderHtml(movies) {
-  console.log(movies);
+function renderHtml() {
   let moviesHtml = "";
-  movies.forEach((movie) => {
+  movieDataArray.forEach((movie) => {
     moviesHtml += `
       <div class="movie">
         <div class="movie-img">
