@@ -8,7 +8,7 @@ document.getElementById("search-btn").addEventListener("click", function (e) {
   e.preventDefault();
   const searchValue = searchInputEl.value;
 
-  fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`)
+  fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}`)
     .then((res) => res.json())
     .then((data) => {
       movieIdArray = data.Search.map((movie) => movie.imdbID);
@@ -16,7 +16,7 @@ document.getElementById("search-btn").addEventListener("click", function (e) {
       // Use Promise.all to wait for all fetches
       return Promise.all(
         movieIdArray.map((id) =>
-          fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`).then(
+          fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`).then(
             (res) => res.json()
           )
         )
