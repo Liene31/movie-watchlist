@@ -67,16 +67,26 @@ a {
 
 form {
   display: flex;
+  border-radius: 5px;
+  position: relative;
+  bottom: 20px;
+}
+
+input,
+.search-btn {
+  display: inline;
+  border: none;
+  font-weight: 500;
+  font-family: inherit;
+  font-size: 0.7rem;
 }
 
 input {
-  display: inline;
   width: 100%;
   background-color: #2e2e2f;
-  border: none;
-  font-family: inherit;
-  font-size: 0.7rem;
-  font-weight: 500;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  padding-left: 3.18em;
 }
 
 input:focus {
@@ -84,16 +94,19 @@ input:focus {
   border: 2px solid #2e2e2f;
 }
 
+.input-icon {
+  position: absolute;
+  padding: 0.62em;
+  color: #81868f;
+}
+
 .search-btn {
-  display: inline;
-  border: none;
-  padding: 12px 30px;
-  font-family: inherit;
+  padding: 1.09em 2.72em;
   cursor: pointer;
   background-color: #4b4b4b;
   color: inherit;
-  font-size: 0.62rem;
-  font-weight: 500;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 img {
