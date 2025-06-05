@@ -110,7 +110,7 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 1em;
-  border-bottom: 1px solid #2c2c2c;
+  border-bottom: 1.5px solid #2c2c2c;
   padding-bottom: 1.25em;
   margin-top: 1.25em;
 }
