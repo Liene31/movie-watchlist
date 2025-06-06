@@ -50,7 +50,7 @@ function renderHtml() {
               <li>${movie.Runtime}</li>
               <li>${movie.Genre}</li>
               <li>
-                  <i class="fa-solid fa-circle-plus add-btn"></i>
+                  <button class="add-btn"><i class="fa-solid fa-circle-plus "></i></button>
                   Watchlist
               </li>
             </ul>

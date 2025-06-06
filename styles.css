@@ -151,7 +151,11 @@ li {
 }
 
 .add-btn {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .movie-description {
@@ -185,6 +189,6 @@ li {
   }
 
   .add-btn {
-    font-size: 15px;
+    font-size: 0.95rem;
   }
 }
