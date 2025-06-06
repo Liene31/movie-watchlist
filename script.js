@@ -3,6 +3,7 @@ const searchInputEl = document.getElementById("search-input");
 const searchResultsEl = document.getElementById("search-results");
 let movieIdArray = [];
 let movieDataArray = [];
+let watchlistDataArray = [];
 
 document.getElementById("search-btn").addEventListener("click", function (e) {
   e.preventDefault();
@@ -66,53 +67,25 @@ function renderHtml() {
 
 // Add movies to My Watchlist
 
+let moviesFromLocalStorage = JSON.parse(localStorage.getItem("myWishList"));
+if (moviesFromLocalStorage) {
+  watchlistDataArray = moviesFromLocalStorage;
+}
+
+console.log(watchlistDataArray);
+
 document.getElementById("main").addEventListener("click", function (e) {
   if (e.target.dataset.watchlistId) {
     getMoviesAddedToWatchlist(e.target.dataset.watchlistId);
+    localStorage.setItem("myWishList", JSON.stringify(watchlistDataArray));
   }
 });
 
 function getMoviesAddedToWatchlist(movieId) {
-  const watchlistDataArray = movieDataArray.find(
+  const watchlistData = movieDataArray.find(
     (movie) => movie.imdbID === movieId
   );
-
-  renderHtmlToWatchlist([watchlistDataArray]);
-}
-
-function renderHtmlToWatchlist(movieArray) {
-  console.log(movieArray);
-
-  let moviesHtml = "";
-  movieArray.forEach((movie) => {
-    moviesHtml += `
-      <div class="movie">
-        <div class="movie-img">
-          <img src="${movie.Poster}" alt="poster from movie ${movie.Title}" />
-        </div>
-        <div class="movie-details">
-          <div class="movie-details-subsection">
-            <div class="movie-title-details">
-              <h2>${movie.Title}</h2>
-              <p class="star"><i class="fa-solid fa-star"></i></p>
-              <p class="movie-raiting">${movie.imdbRating}</p>
-            </div>
-            <ul>
-              <li>${movie.Runtime}</li>
-              <li>${movie.Genre}</li>
-              <li>
-                  <button class="add-btn"><i class="fa-solid fa-circle-plus" data-watchlist-id=${movie.imdbID}></i></button>
-                  Watchlist
-              </li>
-            </ul>
-            <p class="movie-description">${movie.Plot}</p>
-          </div>
-        </div>
-      </div>
-  `;
-  });
-
-  document.getElementById("watchlist").innerHTML = moviesHtml;
+  watchlistDataArray.push(watchlistData);
 }
 
 // 1. Returns currently only first page
