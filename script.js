@@ -9,7 +9,10 @@ let movieIdArray = [];
 let movieDataArray = [];
 let watchlistDataArray = [];
 
-if (path.includes("index.html")) {
+if (
+  window.location.pathname === "/" ||
+  window.location.pathname.endsWith("/index.html")
+) {
   document.getElementById("search-btn").addEventListener("click", function (e) {
     e.preventDefault();
     const searchValue = searchInputEl.value;
