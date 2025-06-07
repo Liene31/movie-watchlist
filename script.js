@@ -68,11 +68,11 @@ function renderHtml() {
 // Add movies to My Watchlist
 
 let moviesFromLocalStorage = JSON.parse(localStorage.getItem("myWishList"));
+
 if (moviesFromLocalStorage) {
   watchlistDataArray = moviesFromLocalStorage;
+  renderMoviesToWatchlist();
 }
-
-console.log(watchlistDataArray);
 
 document.getElementById("main").addEventListener("click", function (e) {
   if (e.target.dataset.watchlistId) {
@@ -86,6 +86,40 @@ function getMoviesAddedToWatchlist(movieId) {
     (movie) => movie.imdbID === movieId
   );
   watchlistDataArray.push(watchlistData);
+}
+
+function renderMoviesToWatchlist() {
+  let moviesHtml = "";
+
+  watchlistDataArray.forEach((movie) => {
+    moviesHtml += `
+      <div class="movie">
+        <div class="movie-img">
+          <img src="${movie.Poster}" alt="poster from movie ${movie.Title}" />
+        </div>
+        <div class="movie-details">
+          <div class="movie-details-subsection">
+            <div class="movie-title-details">
+              <h2>${movie.Title}</h2>
+              <p class="star"><i class="fa-solid fa-star"></i></p>
+              <p class="movie-raiting">${movie.imdbRating}</p>
+            </div>
+            <ul>
+              <li>${movie.Runtime}</li>
+              <li>${movie.Genre}</li>
+              <li>
+                  <button class="add-btn"><i class="fa-solid fa-circle-plus" data-watchlist-id=${movie.imdbID}></i></button>
+                  Watchlist
+              </li>
+            </ul>
+            <p class="movie-description">${movie.Plot}</p>
+          </div>
+        </div>
+      </div>
+  `;
+  });
+
+  // searchResultsEl.innerHTML = moviesHtml;
 }
 
 // 1. Returns currently only first page
