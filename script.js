@@ -86,7 +86,11 @@ if (
     );
     watchlistDataArray.push(watchlistData);
   }
-} else if (path.includes("watchlist.html")) {
+} else if (
+  path === "/watchlist" ||
+  path === "/watchlist/" ||
+  path.endsWith("/watchlist.html")
+) {
   if (moviesFromLocalStorage) {
     renderMoviesToWatchlist();
   }
