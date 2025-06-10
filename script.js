@@ -6,7 +6,8 @@ const myWatchlistEl = document.getElementById("my-watchlist");
 let moviesWatchlistHtml = "";
 let movieIdArray = [];
 let movieDataArray = [];
-let moviesFromLocalStorage = JSON.parse(localStorage.getItem("myWishList"));
+let moviesFromLocalStorage =
+  JSON.parse(localStorage.getItem("myWishList")) || [];
 let watchlistDataArray = moviesFromLocalStorage;
 
 if (
@@ -37,8 +38,33 @@ if (
       .then((data) => {
         movieDataArray = data;
         renderToHtml(movieDataArray, searchResultsEl);
+        searchInputEl.value = "";
+        console.log(searchValue);
       });
   });
+
+  document.getElementById("main").addEventListener("click", function (e) {
+    if (e.target.dataset.watchlistId) {
+      getMoviesAddedToWatchlist(e.target.dataset.watchlistId);
+
+      localStorage.setItem("myWishList", JSON.stringify(watchlistDataArray));
+
+      document
+        .getElementById(`${e.target.dataset.watchlistId}`)
+        .classList.remove("fa-circle-plus");
+
+      document
+        .getElementById(`${e.target.dataset.watchlistId}`)
+        .classList.add("fa-circle-minus");
+    }
+  });
+
+  function getMoviesAddedToWatchlist(movieId) {
+    const watchlistData = movieDataArray.find(
+      (movie) => movie.imdbID === movieId
+    );
+    watchlistDataArray.push(watchlistData);
+  }
 } else if (
   path === "/watchlist" ||
   path === "/watchlist/" ||
@@ -49,23 +75,11 @@ if (
   }
 }
 
-document.getElementById("main").addEventListener("click", function (e) {
-  if (e.target.dataset.watchlistId) {
-    getMoviesAddedToWatchlist(e.target.dataset.watchlistId);
-    localStorage.setItem("myWishList", JSON.stringify(watchlistDataArray));
-  }
-});
-
-function getMoviesAddedToWatchlist(movieId) {
-  const watchlistData = movieDataArray.find(
-    (movie) => movie.imdbID === movieId
-  );
-  watchlistDataArray.push(watchlistData);
-}
-
 function renderToHtml(moviesArray, containerEl) {
   let moviesHtml = "";
+
   moviesArray.forEach((movie) => {
+    console.log(movie);
     moviesHtml += `
     <div class="movie">
       <div class="movie-img">
@@ -82,7 +96,7 @@ function renderToHtml(moviesArray, containerEl) {
             <li>${movie.Runtime}</li>
             <li>${movie.Genre}</li>
             <li>
-                <button class="add-btn"><i class="fa-solid fa-circle-plus" data-watchlist-id=${movie.imdbID}></i></button>
+                <button class="add-btn"><i class="fa-solid fa-circle-plus" id="${movie.imdbID}" data-watchlist-id=${movie.imdbID}></i></button>
                 Watchlist
             </li>
           </ul>
