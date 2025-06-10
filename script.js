@@ -4,10 +4,10 @@ const searchInputEl = document.getElementById("search-input");
 const searchResultsEl = document.getElementById("search-results");
 const myWatchlistEl = document.getElementById("my-watchlist");
 let moviesWatchlistHtml = "";
-let moviesFromLocalStorage = JSON.parse(localStorage.getItem("myWishList"));
 let movieIdArray = [];
 let movieDataArray = [];
-let watchlistDataArray = [];
+let moviesFromLocalStorage = JSON.parse(localStorage.getItem("myWishList"));
+let watchlistDataArray = moviesFromLocalStorage;
 
 if (
   window.location.pathname === "/" ||
@@ -88,7 +88,6 @@ if (
   }
 } else if (path.includes("watchlist.html")) {
   if (moviesFromLocalStorage) {
-    watchlistDataArray = moviesFromLocalStorage;
     renderMoviesToWatchlist();
   }
   myWatchlistEl.innerHTML = moviesWatchlistHtml;
