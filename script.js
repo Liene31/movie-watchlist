@@ -36,70 +36,37 @@ if (
       })
       .then((data) => {
         movieDataArray = data;
-        renderHtml();
+        renderToHtml(movieDataArray, searchResultsEl);
       });
   });
-
-  function renderHtml() {
-    let moviesHtml = "";
-    movieDataArray.forEach((movie) => {
-      moviesHtml += `
-      <div class="movie">
-        <div class="movie-img">
-          <img src="${movie.Poster}" alt="poster from movie ${movie.Title}" />
-        </div>
-        <div class="movie-details">
-          <div class="movie-details-subsection">
-            <div class="movie-title-details">
-              <h2>${movie.Title}</h2>
-              <p class="star"><i class="fa-solid fa-star"></i></p>
-              <p class="movie-raiting">${movie.imdbRating}</p>
-            </div>
-            <ul>
-              <li>${movie.Runtime}</li>
-              <li>${movie.Genre}</li>
-              <li>
-                  <button class="add-btn"><i class="fa-solid fa-circle-plus" data-watchlist-id=${movie.imdbID}></i></button>
-                  Watchlist
-              </li>
-            </ul>
-            <p class="movie-description">${movie.Plot}</p>
-          </div>
-        </div>
-      </div>
-  `;
-    });
-
-    searchResultsEl.innerHTML = moviesHtml;
-  }
-
-  document.getElementById("main").addEventListener("click", function (e) {
-    if (e.target.dataset.watchlistId) {
-      getMoviesAddedToWatchlist(e.target.dataset.watchlistId);
-      localStorage.setItem("myWishList", JSON.stringify(watchlistDataArray));
-    }
-  });
-
-  function getMoviesAddedToWatchlist(movieId) {
-    const watchlistData = movieDataArray.find(
-      (movie) => movie.imdbID === movieId
-    );
-    watchlistDataArray.push(watchlistData);
-  }
 } else if (
   path === "/watchlist" ||
   path === "/watchlist/" ||
   path.endsWith("/watchlist.html")
 ) {
   if (moviesFromLocalStorage) {
-    renderMoviesToWatchlist();
+    renderToHtml(watchlistDataArray, myWatchlistEl);
   }
-  myWatchlistEl.innerHTML = moviesWatchlistHtml;
 }
 
-function renderMoviesToWatchlist() {
-  watchlistDataArray.forEach((movie) => {
-    moviesWatchlistHtml += `
+document.getElementById("main").addEventListener("click", function (e) {
+  if (e.target.dataset.watchlistId) {
+    getMoviesAddedToWatchlist(e.target.dataset.watchlistId);
+    localStorage.setItem("myWishList", JSON.stringify(watchlistDataArray));
+  }
+});
+
+function getMoviesAddedToWatchlist(movieId) {
+  const watchlistData = movieDataArray.find(
+    (movie) => movie.imdbID === movieId
+  );
+  watchlistDataArray.push(watchlistData);
+}
+
+function renderToHtml(moviesArray, containerEl) {
+  let moviesHtml = "";
+  moviesArray.forEach((movie) => {
+    moviesHtml += `
     <div class="movie">
       <div class="movie-img">
         <img src="${movie.Poster}" alt="poster from movie ${movie.Title}" />
@@ -125,6 +92,7 @@ function renderMoviesToWatchlist() {
     </div>
 `;
   });
+  containerEl.innerHTML = moviesHtml;
 }
 
 // 1. Returns currently only first page
